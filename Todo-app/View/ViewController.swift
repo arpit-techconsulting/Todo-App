@@ -23,7 +23,14 @@ class ViewController: UIViewController, UITableViewDelegate {
         setupUI()
         
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.reloadData()
+        
+        if let fetchedTasks = ViewModel.getTaskData(moc: CoreDataManager.shared.persistentContainer.viewContext) {
+            tasks = fetchedTasks
+        }
+        
+        self.tableView.reloadData()
+        
+        
         
     }
     
